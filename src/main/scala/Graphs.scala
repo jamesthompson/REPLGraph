@@ -28,7 +28,7 @@ package object graphs {
                              val mError: Number, 
                              val cError: Number) {
     override def toString : String = s"y = (${"%.3f".format(m)} $pm ${"%.3f".format(mError)})x" + 
-      s"(${"%.3f".format(c)} $pm ${"%.3f".format(cError)}), with R^2 = ${"%.3f".format(Rsquared)}"
+      s"( + ${"%.3f".format(c)} $pm ${"%.3f".format(cError)}), with R^2 = ${"%.3f".format(Rsquared)}"
   }
 
   case class SN(xs: TLN, ys: TLN) {
