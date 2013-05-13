@@ -40,6 +40,7 @@ You can either explicitly provide x axis data, or simply let the code generate a
 For example:
 
 GraphType((xaxis, yaxis)) <- Explicit provision of xaxis
+
 GraphType(yaxis) <- automatic generation of x axis data (1.0 spacing between points)
 
 n.b. if the two input axes are different lengths, the code will automatically create the xaxis (as if no x axis was provided.)
@@ -47,9 +48,13 @@ n.b. if the two input axes are different lengths, the code will automatically cr
 case classes for use are:
 
 LineGraph()
+
 AreaGraph()
+
 ScatterGraph()
+
 PieGraph()
+
 BarGraph()
 
 & 
@@ -91,6 +96,7 @@ LinearFit(yaxisdata1, (xaxisdata2, yaxisdata2), yaxisdata3) // Plot separate fit
 ```
 
 This is just a toy so far! Please let me know if you find this useful. I use the repl a lot to test stuff out and do basic maths stuff. Graphing without having to copy is actually quite useful to me. In theory this could be quite easily expanded to save graphs, print as pdf, and have editable graphical features.
+
 
 Thanks for checking it out!
 
