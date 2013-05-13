@@ -39,11 +39,11 @@ You can either explicitly provide x axis data, or simply let the code generate a
 
 For example:
 
-GraphType((xaxis, yaxis)) <- Explicit provision of xaxis
+GraphType((xaxis, yaxis)) <- Explicit provision of x axis
 
 GraphType(yaxis) <- automatic generation of x axis data (1.0 spacing between points)
 
-n.b. if the two input axes are different lengths, the code will automatically create the xaxis (as if no x axis was provided.)
+n.b. if the two input axes are different lengths, the code will automatically create the x axis (as if no x axis was provided.)
 
 case classes for use are:
 
