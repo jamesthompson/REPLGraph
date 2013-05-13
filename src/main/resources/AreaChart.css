@@ -1,0 +1,52 @@
+.chart {
+    -fx-padding: 15 25 15 15;
+    -fx-legend-visible: true;
+}
+.chart-plot-background {
+    -fx-background-color: white;
+    -fx-background-size: cover, auto;
+    -fx-background-repeat: no-repeat, repeat;
+    -fx-background-position: 0% 0%, 0% 100%;
+    -fx-border-color: transparent transparent transparent transparent;
+}
+
+.chart-alternative-row-fill {
+    -fx-fill: transparent;
+    -fx-stroke: transparent;
+    -fx-stroke-width: 0;
+}
+
+.axis {
+    -fx-tick-mark-visible: true;
+    -fx-minor-tick-visible: true;
+    -fx-tick-length: 3;
+    -fx-minor-tick-length: 2;
+    -fx-border-color: black;
+}
+.axis:bottom {
+    -fx-border-color: transparent transparent transparent transparent;
+}
+.axis:left {
+    -fx-border-color: transparent transparent transparent transparent;
+}
+.axis Text{
+    -fx-fill: black;
+}
+.tick-mark {
+    -fx-font-size: 10px;
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1 );
+}
+
+.chart-series-area-line {    
+    -fx-stroke-width: 1.0px;
+    -fx-effect: null;
+}
+
+.chart-area-symbol {
+    -fx-background-radius: 1.5px;
+    -fx-padding: 1.5px;
+}
+
+.default-color0.chart-series-area-line { -fx-stroke: #000000; }
+.default-color0.chart-area-symbol { -fx-background-color: #000000, #000000; }
+.default-color0.chart-series-area-fill { -fx-fill: rgba(0,0,0,0.2)}
