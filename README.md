@@ -4,6 +4,8 @@ Scala implicit conversions to make GUI graphs using JavaFX and Swing.
 
 Simple graphing for the REPL. Plot JavaFX line, area, scatter, bar and pie graphs easily. Also do linear regression and plot the results straightforwardly. 
 
+See video: http://www.youtube.com/watch?v=zxhjkJlhqfI
+
 ## Intro
 
 Download the package. Building is done with SBT.
