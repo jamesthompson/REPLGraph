@@ -35,14 +35,26 @@ import replgraph.graphs._
 
 ## Usage
 
-You can either explicitly provide xaxis data, or simply let the code generate an xaxis for you, with points separated by 1.0 for each unit. Explicit provision of xaxis is done by giving the graph object a tuple with data in any TraversableLike collection, e.g. List, Seq, Vector. Data must be any basic numeric type: byte, int, short, long, float, double, bigint or bigdecimal. 
+You can either explicitly provide x axis data, or simply let the code generate an xaxis for you, with points separated by 1.0 for each unit. Explicit provision of x axis is done by giving the graph object a tuple with data in any TraversableLike collection, e.g. List, Seq, Vector. Data must be any basic numeric type: byte, int, short, long, float, double, bigint or bigdecimal. 
 
 For example:
 
-Graph((xaxis, yaxis)) <- Explicit provision of xaxis
-Graph(yaxis) <- automatic generation of xaxis data (1.0 spacing between points)
+GraphType((xaxis, yaxis)) <- Explicit provision of xaxis
+GraphType(yaxis) <- automatic generation of x axis data (1.0 spacing between points)
 
 n.b. if the two input axes are different lengths, the code will automatically create the xaxis (as if no x axis was provided.)
+
+case classes for use are:
+
+LineGraph()
+AreaGraph()
+ScatterGraph()
+PieGraph()
+BarGraph()
+
+& 
+
+LinearFit()
 
 ## Examples - Try these out
 
