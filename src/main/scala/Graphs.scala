@@ -34,6 +34,7 @@ package object graphs {
   case class SN(xs: TLN, ys: TLN) {
     lazy val points = xs.toVector.zip(ys.toVector)
   }
+  
   case class SS(xs: TLS, ys: TLN) {
     lazy val points = xs.toVector.zip(ys.toVector)
   }
@@ -69,6 +70,7 @@ package object graphs {
     val iny = spirize(ys)
     SN((0 until iny.size).toVector.map(Number(_)), iny)
   }
+
   implicit def toSSeriesYS[N: Numeric, M[+_]](ys: M[N])
     (implicit bf: CanBuildFrom[M[N], Number, M[Number]],
               ev: M[N] => TraversableLike[N, M[N]], 
@@ -76,6 +78,7 @@ package object graphs {
     val iny = spirize(ys)
     SS((0 until iny.size).map("Cat " + _.toString).toVector, iny)
   }
+
   implicit def toNSeries[NA: Numeric, NB: Numeric, MA[+_], MB[+_]](in: (MA[NA], MB[NB]))
     (implicit cbfa: CanBuildFrom[MA[NA], Number, MA[Number]],
               eva: MA[NA] => TraversableLike[NA, MA[NA]],
@@ -87,6 +90,7 @@ package object graphs {
     val iny = spirize(in._2)
     if(inx.size != iny.size) SN((0 until iny.size).toVector.map(Number(_)), iny) else SN(inx, iny)
   }
+
   implicit def toSSeries[N: Numeric, M[+_]](in: (TLS,  M[N]))
     (implicit bf: CanBuildFrom[M[N], Number, M[Number]],
               ev: M[N] => TraversableLike[N, M[N]], 
