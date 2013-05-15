@@ -34,7 +34,7 @@ package object graphs {
   case class SN(xs: TLN, ys: TLN) {
     lazy val points = xs.toVector.zip(ys.toVector)
   }
-  
+
   case class SS(xs: TLS, ys: TLN) {
     lazy val points = xs.toVector.zip(ys.toVector)
   }
@@ -201,7 +201,11 @@ package object graphs {
       val svar = rss / (length - 2).toDouble
       val stErrGradient = svar / xxbar
       val stErrIntercept = (svar / length) + (sqr(xbar) * stErrGradient)
-      Some(LinearFitResult(g, m, c, rsquared, Number(math.sqrt(stErrGradient.toDouble)), Number(math.sqrt(stErrIntercept.toDouble))))
+      Some(LinearFitResult(g, 
+                           m,
+                           c,
+                           rsquared,
+                           Number(math.sqrt(stErrGradient.toDouble)), Number(math.sqrt(stErrIntercept.toDouble))))
     } catch { case e: Exception => None }
   }
 
