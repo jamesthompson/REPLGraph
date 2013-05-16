@@ -5,7 +5,8 @@ import org.specs2.mutable._
 object ReplGraphSpec extends Specification {
 	
 	import graphs._
-	
+
+
 		"conversions from traversables[Numeric] objects to traversables[spire.math.Number]" should {
 			
 			"be possible from a List[Int] object to a List[Number]" in	{
