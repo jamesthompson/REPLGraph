@@ -55,6 +55,7 @@ package object graphs {
   case class LinearFit(s: SN*) extends NGraph { fitPlot(this) }
 
   implicit val num = compat.numeric[Number]
+  
   def spirize[N: Numeric, M[+_]](xs: M[N])
     (implicit bf: CanBuildFrom[M[N], Number, M[Number]],
               ev: M[N] => TraversableLike[N, M[N]], 
@@ -80,15 +81,17 @@ package object graphs {
   }
 
   implicit def toNSeries[NA: Numeric, NB: Numeric, MA[+_], MB[+_]](in: (MA[NA], MB[NB]))
-    (implicit cbfa: CanBuildFrom[MA[NA], Number, MA[Number]],
+    (implicit bfa: CanBuildFrom[MA[NA], Number, MA[Number]],
               eva: MA[NA] => TraversableLike[NA, MA[NA]],
-              cbfb: CanBuildFrom[MB[NB], Number, MB[Number]],
+              bfb: CanBuildFrom[MB[NB], Number, MB[Number]],
               evb: MB[NB] => TraversableLike[NB, MB[NB]],
               efa: MA[Number] => TLN,
               efb: MB[Number] => TLN) : SN = {
     val inx = spirize(in._1)
     val iny = spirize(in._2)
-    if(inx.size != iny.size) SN((0 until iny.size).toVector.map(Number(_)), iny) else SN(inx, iny)
+    if(inx.size != iny.size) {
+      SN((0 until iny.size).toVector.map(Number(_)), iny) 
+    } else SN(inx, iny)
   }
 
   implicit def toSSeries[N: Numeric, M[+_]](in: (TLS,  M[N]))
@@ -96,8 +99,10 @@ package object graphs {
               ev: M[N] => TraversableLike[N, M[N]], 
               ef: M[Number] => TLN) : SS = {
     val iny = spirize(in._2)
-    if(in._1.size != iny.size) SS((0 until iny.size).map("Cat " + _.toString).toVector, iny) else SS(in._1, iny)
-  } 
+    if(in._1.size != iny.size) {
+      SS((0 until iny.size).map("Cat " + _.toString).toVector, iny) 
+    } else SS(in._1, iny)
+  }
 
   def graphNumerical(l: NGraph) = {
     val frame = new JFrame()
@@ -195,17 +200,13 @@ package object graphs {
         val fit = m * d._1 + c
         (sqr(fit - d._2), sqr(fit - ybar))
       }
-      val rss = out.map(_._1).sum
-      val ssr = out.map(_._2).sum
-      val rsquared = ssr / yybar
-      val svar = rss / (length - 2).toDouble
-      val stErrGradient = svar / xxbar
-      val stErrIntercept = (svar / length) + (sqr(xbar) * stErrGradient)
-      Some(LinearFitResult(g, 
-                           m,
-                           c,
-                           rsquared,
-                           Number(math.sqrt(stErrGradient.toDouble)), Number(math.sqrt(stErrIntercept.toDouble))))
+      val rsquared = out.map(_._2).sum / yybar
+      val svar = out.map(_._1).sum / (length - 2).toDouble
+      val stErrGradient = (svar / xxbar).toDouble
+      val stErrIntercept = ((svar / length) + (sqr(xbar) * stErrGradient)).toDouble
+      Some(LinearFitResult(g, m, c, rsquared,
+                           Number(math.sqrt(stErrGradient)), 
+                           Number(math.sqrt(stErrIntercept))))
     } catch { case e: Exception => None }
   }
 
@@ -227,7 +228,8 @@ package object graphs {
           val yaxis = new NumberAxis()
           val graph = new LineChart[JNumber, JNumber](xaxis, yaxis)
           val fitSeries : XYChart.Series[JNumber, JNumber] = new XYChart.Series()
-          f.series.points.map(p => fitSeries.getData.add(new XYChart.Data(p._1.toDouble, ((f.m * p._1) + f.c).toDouble)))
+          f.series.points.map(p => {
+            fitSeries.getData.add(new XYChart.Data(p._1.toDouble, ((f.m * p._1) + f.c).toDouble))})
           graph.getData.add(series)
           graph.getData.add(fitSeries)
           series.setName("Data")

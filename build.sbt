@@ -18,6 +18,11 @@ unmanagedJars in Compile += Attributed.blank(file("/Library/Java/JavaVirtualMach
 
 libraryDependencies += "org.spire-math" %% "spire" % "0.3.0"
 
+libraryDependencies += "org.specs2" %% "specs2" % "1.14" % "test"
+  
+resolvers ++= Seq("snapshots" at "http://oss.sonatype.org/content/repositories/snapshots",
+                  "releases"  at "http://oss.sonatype.org/content/repositories/releases")
+
 jarName in assembly := "replgraph.jar"
 
 retrieveManaged := true
