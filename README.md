@@ -35,6 +35,12 @@ then import the package object:
 import replgraph.graphs._
 ```
 
+For an elegant exit type:
+
+```scala
+exit
+```
+
 ## Usage
 
 You can either explicitly provide x axis data, or simply let the code generate an xaxis for you, with points separated by 1.0 for each unit. Explicit provision of x axis is done by giving the graph object a tuple with data in any TraversableLike collection, e.g. List, Seq, Vector. Data must be any basic numeric type: byte, int, short, long, float, double, bigint or bigdecimal. 

@@ -69,6 +69,7 @@ package object graphs {
               ev: M[N] => TraversableLike[N, M[N]], 
               ef: M[Number] => TLN) : SN = {
     val iny = spirize(ys)
+    println("Automatically provisioning x axis values from 0 until ys size by 1.0")
     SN((0 until iny.size).toVector.map(Number(_)), iny)
   }
 
@@ -77,6 +78,7 @@ package object graphs {
               ev: M[N] => TraversableLike[N, M[N]], 
               ef: M[Number] => TLN) : SS = {
     val iny = spirize(ys)
+    println("Automatically provisioning series categories from Cat 0 until ys size (e.g. Cat n)")
     SS((0 until iny.size).map("Cat " + _.toString).toVector, iny)
   }
 
@@ -90,6 +92,7 @@ package object graphs {
     val inx = spirize(in._1)
     val iny = spirize(in._2)
     if(inx.size != iny.size) {
+      println("Lengths of x and y axes values do not match, hence x axis values automatically provisioned")
       SN((0 until iny.size).toVector.map(Number(_)), iny) 
     } else SN(inx, iny)
   }
@@ -100,6 +103,7 @@ package object graphs {
               ef: M[Number] => TLN) : SS = {
     val iny = spirize(in._2)
     if(in._1.size != iny.size) {
+      println("Lengths of x and y axes values do not match, hence value categories automatically provisioned")
       SS((0 until iny.size).map("Cat " + _.toString).toVector, iny) 
     } else SS(in._1, iny)
   }
@@ -241,5 +245,7 @@ package object graphs {
       })
     })
   }
+
+  def exit = System.exit(0)
   
 } 
